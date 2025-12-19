@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WealthWise - Smart Finance Tracking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #0f2c4a; /* Deep Navy */
+            --secondary-color: #10b981; /* Growth Green */
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --accent-color: #64748b;
+            --gradient-primary: linear-gradient(135deg, #0f2c4a 0%, #1e40af 100%);
+            --gradient-secondary: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* NAVBAR STYLING */
+        .navbar {
+            background-color: rgba(15, 44, 74, 0.98);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+        }
+
+        .navbar-brand .brand-icon {
+            color: var(--secondary-color);
+        }
+
+        .nav-link {
+            position: relative;
+            margin: 0 5px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9) !important;
+            transition: var(--transition);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        /* HERO SECTION STYLING */
+        .hero-section {
+            background: linear-gradient(rgba(15, 44, 74, 0.8), rgba(15, 44, 74, 0.7)),
+            url('https://images.pexels.com/photos/164525/pexels-photo-164525.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 160px 0;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, var(--light-color), transparent);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        /* BUTTON STYLING */
+        .btn {
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .btn-lg {
+            padding: 15px 40px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-secondary);
+            border: none;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        }
+
+        .btn-outline-light {
+            border-width: 2px;
+            font-weight: 500;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            color: var(--primary-color);
+            background-color: white;
+            border-color: white;
+        }
+
+        /* SECTION STYLING */
+        .section-title {
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            text-align: center;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-secondary);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* FEATURE CARDS */
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            transition: var(--transition);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            height: 100%;
+            overflow: hidden;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .feature-card .card-header {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+            border: none;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-icon {
+            background-color: rgba(16, 185, 129, 0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--secondary-color);
+            font-size: 28px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        /* CALCULATOR SECTION (Formerly CTA) */
+        .cta-section {
+            background: linear-gradient(rgba(15, 44, 74, 0.92), rgba(15, 44, 74, 0.92)),
+            url('https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 80px 0;
+            border-radius: 20px;
+            margin: 60px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            color: white;
+        }
+
+        .cta-section .card {
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            border: none;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .form-control, .form-select {
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .form-label {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        /* COMING SOON / ALERTS */
+        .coming-soon {
+            background-color: #ecfdf5;
+            border-left: 5px solid var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .coming-soon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* DASHBOARD PREVIEW / GALLERY */
+        .gallery-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+            border-radius: 15px;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(15, 44, 74, 0.9));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* INSIGHT CARDS (Formerly Train Journeys) */
+        .insight-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            background: white;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .insight-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .insight-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15, 44, 74, 0.95), transparent);
+            padding: 25px;
+            color: white;
+        }
+
+        .insight-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* TESTIMONIALS */
+        .testimonial-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e2e8f0;
+            margin-right: 15px;
+        }
+
+        .star-rating {
+            color: #fbbf24; /* Amber/Gold */
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 80px 0 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-secondary);
+        }
+
+        .footer h5 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .footer h5:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-section {
+                padding: 100px 0;
+            }
+        }
+
+        /* FLOATING ELEMENT */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-chart-line me-2 brand-icon"></i>WealthWise
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/expenses"><i class="fas fa-wallet me-1"></i> Expenses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fas fa-chart-pie me-1"></i> Investments</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fas fa-file-invoice-dollar me-1"></i> Reports</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-primary" href="/login"><i class="fas fa-user-circle me-1"></i> Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section text-center">
+    <div class="container hero-content">
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Master Your Financial Future</h1>
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Track expenses, manage budgets, and grow your wealth with our premium financial analytics platform.</p>
+        <div class="d-flex justify-content-center gap-3" data-aos="fade-up" data-aos-delay="300">
+            <a href="/signup" class="btn btn-primary btn-lg">Start Free</a>
+            <a href="/signup" class="btn btn-outline-light btn-lg">View Demo</a>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Featured Insights -->
+    <section class="mb-5" data-aos="fade-up">
+        <h2 class="section-title">Smart Financial Insights</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="insight-card">
+                    <span class="insight-badge">Trending</span>
+                    <img src="https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg" class="insight-img" alt="Investment Growth">
+                    <div class="insight-content">
+                        <h4>Investment Tracking</h4>
+                        <p>Real-time visualization of your stock and crypto portfolios.</p>
+                        <a href="#" class="btn btn-sm btn-outline-light">Analyze Portfolio</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="insight-card">
+                    <span class="insight-badge">Essential</span>
+                    <img src="https://images.pexels.com/photos/4386339/pexels-photo-4386339.jpeg" class="insight-img" alt="Budget Planning">
+                    <div class="insight-content">
+                        <h4>Smart Budgeting</h4>
+                        <p>AI-driven categorization to help you save more every month.</p>
+                        <a href="#" class="btn btn-sm btn-outline-light">Setup Budget</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="insight-card">
+                    <span class="insight-badge">Premium</span>
+                    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg" class="insight-img" alt="Wealth Management">
+                    <div class="insight-content">
+                        <h4>Retirement Planning</h4>
+                        <p>Long-term projection tools to secure your financial freedom.</p>
+                        <a href="#" class="btn btn-sm btn-outline-light">Plan Future</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Feature Showcase (Carousel) -->
+    <section class="mb-5" data-aos="fade-up">
+        <div id="financeCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#financeCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#financeCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#financeCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner rounded-4 overflow-hidden shadow-lg">
+                <div class="carousel-item active">
+                    <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg" class="d-block w-100" style="height:450px; object-fit:cover;" alt="Analytics Dashboard">
+                    <div class="carousel-caption d-none d-md-block" style="background: rgba(15, 44, 74, 0.8);">
+                        <h5>Comprehensive Analytics</h5>
+                        <p>Visualize your spending habits with intuitive charts and graphs.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" class="d-block w-100" style="height:450px; object-fit:cover;" alt="Team Collaboration">
+                    <div class="carousel-caption d-none d-md-block" style="background: rgba(15, 44, 74, 0.8);">
+                        <h5>Family & Team Sharing</h5>
+                        <p>Manage household expenses or small business accounts together.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/164501/pexels-photo-164501.jpeg" class="d-block w-100" style="height:450px; object-fit:cover;" alt="Mobile Banking">
+                    <div class="carousel-caption d-none d-md-block" style="background: rgba(15, 44, 74, 0.8);">
+                        <h5>Mobile Freedom</h5>
+                        <p>Track your finances on the go with our award-winning mobile app.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#financeCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#financeCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="mb-5" data-aos="fade-up">
+        <h2 class="section-title">Financial Tools</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-card card h-100">
+                    <div class="card-header text-center">
+                        Daily Tracking
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <h5 class="card-title">Expense Manager</h5>
+                        <p class="card-text">Scan receipts and categorize expenses automatically with AI.</p>
+                        <a href="/expenses" class="btn btn-primary">Track Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-card card h-100">
+                    <div class="card-header text-center">
+                        Goal Setting
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h5 class="card-title">Savings Goals</h5>
+                        <p class="card-text">Set targets for vacations, cars, or homes and track your progress.</p>
+                        <a href="/goals" class="btn btn-primary">Set Goals</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-card card h-100">
+                    <div class="card-header text-center">
+                        Reports
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h5 class="card-title">Deep Analytics</h5>
+                        <p class="card-text">Generate PDF reports and monthly summaries of your net worth.</p>
+                        <a href="/reports" class="btn btn-primary">View Reports</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Savings Calculator Section (Replaces Ticket Form) -->
+    <section class="cta-section text-center" data-aos="fade-up">
+        <div class="container">
+            <h2 class="mb-4">Project Your Wealth</h2>
+            <p class="lead mb-5">See how your savings can grow with compound interest over time.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-start d-block">Initial Deposit ($)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control mb-0" placeholder="1000">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-start d-block">Monthly Contribution ($)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control mb-0" placeholder="500">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-start d-block">Interest Rate (%)</label>
+                                    <input type="number" class="form-control" placeholder="7.0">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-start d-block">Investment Period (Years)</label>
+                                    <select class="form-select">
+                                        <option>5 Years</option>
+                                        <option selected>10 Years</option>
+                                        <option>20 Years</option>
+                                        <option>30 Years</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="button" class="btn btn-primary btn-lg px-5">Calculate Growth</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial-section mb-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://i.pravatar.cc/150?img=33" alt="User" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0">David Chen</h5>
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"WealthWise helped me clear $20k in debt in just two years. The budget tracking features are a lifesaver!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="User" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0">Sarah Miller</h5>
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The investment dashboard is beautiful and easy to understand. I finally know where my money is going."</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="User" class="testimonial-img">
+                            <div>
+                                <h5 class="mb-0">James Wilson</h5>
+                                <div class="star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"I love the automated reports. It makes tax season so much easier for my freelance business."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="my-5" data-aos="fade-up">
+        <h2 class="section-title">New Features</h2>
+        <div class="coming-soon mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-robot display-4 text-muted floating"></i>
+                </div>
+                <div class="col-md-10">
+                    <h4>AI Financial Advisor</h4>
+                    <p class="mb-0">Our AI-powered advisor is in beta. Soon you'll get personalized investment tips based on your spending habits and market trends.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-success" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-check-circle me-2"></i>
+            Crypto wallet integration is now live! Connect your wallets to track all assets in one place.
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5>WealthWise</h5>
+                <p>Empowering individuals to take control of their financial destiny through smart tracking, budgeting, and investment insights.</p>
+                <div class="social-links mt-4">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4 mb-md-0">
+                <h5>Platform</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="footer-link">Dashboard</a></li>
+                    <li><a href="#" class="footer-link">Features</a></li>
+                    <li><a href="#" class="footer-link">Pricing</a></li>
+                    <li><a href="#" class="footer-link">API Access</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>Contact</h5>
+                <address class="mb-0">
+                    <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> 88 Finance District, NY</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i> (555) 123-4567</p>
+                    <p class="mb-2"><i class="fas fa-envelope me-2"></i> support@wealthwise.com</p>
+                </address>
+            </div>
+            <div class="col-md-3">
+                <h5>Market Updates</h5>
+                <p>Get weekly financial tips and market summaries.</p>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email address">
+                    <button class="btn btn-secondary" type="button">Join</button>
+                </div>
+                <p class="small text-white-50">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+        <hr class="my-4 bg-light opacity-25">
+        <div class="text-center">
+            <p class="mb-0 opacity-75">&copy; 2025 WealthWise Inc. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+    });
+</script>
+</body>
+</html>

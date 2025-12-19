@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Secure Access</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-animated {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active{
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  </style>
+</head>
+<body class="bg-animated min-h-screen flex items-center justify-center p-4">
+
+<div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-fade-in-up">
+
+  <div class="hidden md:block w-1/2 bg-brand-900 relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-900/90 to-black/50 z-10"></div>
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+         alt="Office Background"
+         class="absolute inset-0 w-full h-full object-cover grayscale opacity-50 mix-blend-overlay">
+
+    <div class="relative z-20 h-full flex flex-col justify-between p-12 text-white">
+      <div>
+        <div class="flex items-center gap-2 mb-6">
+          <i class="fa-solid fa-chart-line text-3xl text-blue-400"></i>
+          <span class="text-2xl font-bold tracking-tight">Wealth<span class="text-blue-400">Wise</span></span>
+        </div>
+        <h2 class="text-3xl font-bold leading-tight mb-4">Welcome to the future of finance management. </h2>
+        <p class="text-blue-100/80">Track your expenses, manage budgets, and grow your wealth with our integrated platform.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 text-sm text-blue-100/70">
+          <i class="fa-solid fa-check-circle text-blue-400"></i>
+          <span>Secure End-to-End Encryption</span>
+        </div>
+        <div class="flex items-center gap-3 text-sm text-blue-100/70">
+          <i class="fa-solid fa-check-circle text-blue-400"></i>
+          <span>24/7 Financial Insights</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full md:w-1/2 p-8 md:p-12 bg-white relative">
+    <div class="max-w-md mx-auto">
+
+      <a href="/" class="inline-flex items-center text-sm text-gray-500 hover:text-brand-600 transition-colors mb-6 group">
+        <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+        Back to Home
+      </a>
+
+      <div class="text-center mb-10 md:text-left">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h1>
+        <p class="text-gray-500 text-sm">Please enter your details to continue. </p>
+      </div>
+
+      <div id="alertBox" class="hidden mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm flex items-center gap-2">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="alertText">Invalid credentials</span>
+      </div>
+
+      <form th:action="@{/login}" th:object="${loginRequest}" method="post" class="space-y-6">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fa-regular fa-envelope text-gray-400"></i>
+            </div>
+            <input type="email" id="email" name="email"
+                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors sm:text-sm"
+                   placeholder="you@example.com" required>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <a href="#" class="text-xs font-medium text-brand-600 hover:text-brand-500">Forgot password?</a>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fa-solid fa-lock text-gray-400"></i>
+            </div>
+            <input type="password" id="password" name="password"
+                   class="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors sm:text-sm"
+                   placeholder="••••••••" required>
+            <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 cursor-pointer">
+              <i id="eyeIcon" class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <input id="remember-me" name="remember-me" type="checkbox"
+                 class="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded cursor-pointer">
+          <label for="remember-me" class="ml-2 block text-sm text-gray-900 cursor-pointer">Remember me for 30 days</label>
+        </div>
+
+        <button type="submit"
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all transform active:scale-[0.98]">
+          Sign In
+        </button>
+      </form>
+
+      <div class="mt-8 text-center text-sm text-gray-500">
+        Don't have an account?
+        <a href="/signup" class="font-medium text-brand-600 hover:text-brand-500">Sign up for free</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API_BASE = 'http://localhost:8080/api';
+
+  function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+    }
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const rememberMe = document.getElementById('remember-me').checked;
+    const btn = e.target.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    const alertBox = document.getElementById('alertBox');
+    const alertText = document.getElementById('alertText');
+
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+    btn.disabled = true;
+    btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+    alertBox.classList.add('hidden');
+
+    try {
+      const response = await fetch(`${API_BASE}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          rememberMe: rememberMe
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Success! ';
+        btn.classList.remove('bg-brand-600');
+        btn.classList.add('bg-green-600');
+
+        setTimeout(() => {
+          window.location.href = '/dashboard. html';
+        }, 500);
+      } else {
+        throw new Error(data.error || 'Login failed');
+      }
+    } catch (error) {
+      alertText.textContent = error.message;
+      alertBox.classList.remove('hidden');
+
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+      btn.classList.remove('opacity-75', 'cursor-not-allowed');
+    }
+  }
+</script>
+</body>
+</html>

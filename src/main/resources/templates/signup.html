@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - NexGenSys</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Consistent Background Animation */
+        .bg-animated {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Input autofill fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px white inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Password strength meter transition */
+        .strength-meter-bar {
+            transition: width 0.3s ease-in-out, background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-animated min-h-screen flex items-center justify-center p-4">
+
+<div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+
+    <div class="hidden md:block w-1/2 bg-brand-900 relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-900/90 to-purple-900/50 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"
+             alt="Team Collaboration"
+             class="absolute inset-0 w-full h-full object-cover grayscale opacity-50 mix-blend-overlay">
+
+        <div class="relative z-20 h-full flex flex-col justify-between p-12 text-white">
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <i class="fa-solid fa-layer-group text-3xl text-blue-400"></i>
+                    <span class="text-2xl font-bold tracking-tight">NexGen<span class="text-blue-400">Sys</span></span>
+                </div>
+                <h2 class="text-3xl font-bold leading-tight mb-4">Join the community.</h2>
+                <p class="text-blue-100/80">Create an account today and start optimizing your workflow with our advanced tools.</p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div class="flex text-yellow-400 mb-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="italic text-sm text-blue-50">"NexGenSys transformed how our team handles projects. The onboarding was seamless."</p>
+                <p class="mt-3 text-xs font-bold uppercase tracking-wider text-blue-200">- Sarah Jenkins, CTO</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-8 md:p-12 bg-white relative overflow-y-auto max-h-[90vh]">
+        <div class="max-w-md mx-auto">
+
+            <a href="/" class="inline-flex items-center text-sm text-gray-500 hover:text-brand-600 transition-colors mb-6 group">
+                <i class="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+                Back to Home
+            </a>
+
+            <div class="text-center md:text-left mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Get Started</h1>
+                <p class="text-gray-500 text-sm">Create your free account. No credit card required.</p>
+            </div>
+
+            <form action="/signup" method="post" class="space-y-5">
+
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-user text-gray-400"></i>
+                        </div>
+                        <input type="text" id="fullname" name="fullname"
+                               class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors sm:text-sm"
+                               placeholder="John Doe" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" id="email" name="email"
+                               class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors sm:text-sm"
+                               placeholder="you@company.com" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" id="password" name="password" oninput="checkStrength(this.value)"
+                               class="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors sm:text-sm"
+                               placeholder="Create a password" required>
+                    </div>
+
+                    <div class="mt-2 h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div id="strengthBar" class="h-full w-0 bg-red-500 strength-meter-bar"></div>
+                    </div>
+                    <p id="strengthText" class="text-xs text-gray-500 mt-1 text-right">Must be at least 8 characters</p>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="terms" name="terms" type="checkbox" required
+                               class="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded cursor-pointer">
+                    </div>
+                    <div class="ml-2 text-sm">
+                        <label for="terms" class="font-medium text-gray-700 cursor-pointer">I agree to the <a href="#" class="text-brand-600 hover:text-brand-500">Terms of Service</a> and <a href="#" class="text-brand-600 hover:text-brand-500">Privacy Policy</a></label>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all transform active:scale-[0.98]">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">Or sign up with</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <a href="/oauth2/authorization/google" class="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors no-underline">
+                        <i class="fa-brands fa-google text-red-500 mr-2"></i> Google
+                    </a>
+                    <a href="/oauth2/authorization/github" class="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors no-underline">
+                        <i class="fa-brands fa-github text-gray-900 mr-2"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-sm text-gray-500">
+                Already have an account?
+                <a href="/login" class="font-medium text-brand-600 hover:text-brand-500">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkStrength(password) {
+        const bar = document.getElementById('strengthBar');
+        const text = document.getElementById('strengthText');
+        let strength = 0;
+
+        if (password.length > 7) strength += 25;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 25;
+        if (password.match(/\d/)) strength += 25;
+        if (password.match(/[^a-zA-Z\d]/)) strength += 25;
+
+        bar.style.width = strength + '%';
+
+        if (strength <= 25) {
+            bar.classList.remove('bg-yellow-500', 'bg-green-500');
+            bar.classList.add('bg-red-500');
+            text.textContent = 'Weak';
+            text.className = 'text-xs text-red-500 mt-1 text-right';
+        } else if (strength <= 50) {
+            bar.classList.remove('bg-red-500', 'bg-green-500');
+            bar.classList.add('bg-yellow-500');
+            text.textContent = 'Fair';
+            text.className = 'text-xs text-yellow-500 mt-1 text-right';
+        } else {
+            bar.classList.remove('bg-red-500', 'bg-yellow-500');
+            bar.classList.add('bg-green-500');
+            text.textContent = 'Strong';
+            text.className = 'text-xs text-green-600 mt-1 text-right';
+        }
+    }
+
+    function handleSignup(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating...';
+        btn.disabled = true;
+        btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Success!';
+            btn.classList.remove('bg-brand-600', 'hover:bg-brand-700');
+            btn.classList.add('bg-green-600', 'hover:bg-green-700');
+
+            setTimeout(() => {
+                // Redirect simulation
+                // window.location.href = 'dashboard.html';
+                alert("Account created successfully!");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed', 'bg-green-600', 'hover:bg-green-700');
+                btn.classList.add('bg-brand-600', 'hover:bg-brand-700');
+            }, 1000);
+        }, 1500);
+    }
+</script>
+</body>
+</html>
